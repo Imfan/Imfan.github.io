@@ -1,0 +1,50 @@
+<!DOCTYPE html><html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description"><title> | Imfan</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="/css/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/1.0.0/pure-min.css"><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><script type="text/javascript" src="/js/jquery.3.3.1.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">Imfan</h1><a id="logo" href="/.">Imfan</a><p class="description"></p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> Start</i></a><a href="/archives/"><i class="fa fa-archive"> Archiv</i></a><a href="/about/"><i class="fa fa-user"> Über</i></a><a href="/atom.xml"><i class="fa fa-rss"> RSS</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title"></h1><div class="post-meta">May 10, 2017</div><div class="post-content"><h1 id="es6-中变量解构赋值的用途"><a href="#es6-中变量解构赋值的用途" class="headerlink" title="es6 中变量解构赋值的用途"></a>es6 中变量解构赋值的用途</h1><h2 id="1-交换变量的值"><a href="#1-交换变量的值" class="headerlink" title="1 交换变量的值"></a>1 交换变量的值</h2><pre><code>let x = 1;
+let y = 2;
+
+[x, y] = [y, x];
+</code></pre><h2 id="2-从函数中返回多个值"><a href="#2-从函数中返回多个值" class="headerlink" title="2 从函数中返回多个值"></a>2 从函数中返回多个值</h2><p>函数只能返回一个值，如果要返回多个值，只能将它们放在数组或对象里返回。有了解构赋值，取出这些值就非常方便。<br>    // 返回一个数组</p>
+<pre><code>function example() {
+  return [1, 2, 3];
+}
+let [a, b, c] = example();
+
+// 返回一个对象
+
+function example() {
+  return {
+    foo: 1,
+    bar: 2
+  };
+}
+let { foo, bar } = example();
+let {log} = Math
+</code></pre><h2 id="4-提取JSON数据"><a href="#4-提取JSON数据" class="headerlink" title="4 提取JSON数据"></a>4 提取JSON数据</h2><p>解构赋值对提取JSON对象中的数据，尤其有用。<br>    let jsonData = {<br>      id: 42,<br>      status: “OK”,<br>      data: [867, 5309]<br>    };</p>
+<pre><code>let { id, status, data: number } = jsonData;
+
+console.log(id, status, number);
+// 42, &quot;OK&quot;, [867, 5309]
+</code></pre><h2 id="5-函数参数的默认值"><a href="#5-函数参数的默认值" class="headerlink" title="5 函数参数的默认值"></a>5 函数参数的默认值</h2><pre><code>jQuery.ajax = function (url, {
+  async = true,
+  beforeSend = function () {},
+  cache = true,
+  complete = function () {},
+  crossDomain = false,
+  global = true,
+  // ... more config
+}) {
+  // ... do stuff
+};
+</code></pre><p>指定参数的默认值，就避免了在函数体内部再写<code>var foo = config.foo || &#39;default foo&#39;;</code>这样的语句</p>
+<h2 id="6-遍历Map结构"><a href="#6-遍历Map结构" class="headerlink" title="6 遍历Map结构"></a>6 遍历Map结构</h2><p>任何部署了Iterator接口的对象，都可以用for…of循环遍历。Map结构原生支持Iterator接口，配合变量的解构赋值，获取键名和键值就非常方便。<br>    var map = new Map();<br>    map.set(‘first’, ‘hello’);<br>    map.set(‘second’, ‘world’);</p>
+<pre><code>for (let [key, value] of map) {
+  console.log(key + &quot; is &quot; + value);
+}
+// first is hello
+// second is world
+</code></pre><p>如果只想获取键名，或者只想获取键值，可以写成下面这样。<br>    // 获取键名<br>    for (let [key] of map) {<br>      // …<br>    }</p>
+<pre><code>// 获取键值
+for (let [,value] of map) {
+  // ...
+}
+</code></pre><h2 id="7-输入模块的指定方法"><a href="#7-输入模块的指定方法" class="headerlink" title="7 输入模块的指定方法"></a>7 输入模块的指定方法</h2><p>加载模块时，往往需要指定输入哪些方法。解构赋值使得输入语句非常清晰。<br>    const { SourceMapConsumer, SourceNode } = require(“source-map”);</p>
+</div><div class="tags"></div><div class="post-nav"><a class="pre" href="/2018/10/17/go/">GO 需要注意的地方</a><a class="next" href="/2017/05/10/git 简要总结/"></a></div></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2018 <a href="/." rel="nofollow">Imfan.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="/js/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="/css/jquery.fancybox.min.css"><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>
